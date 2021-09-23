@@ -7,31 +7,38 @@ import java.util.Random;
 public class Base {
     public static void main(String[] args) {
         int[] myarray = new int[20];
+        System.out.println("Массив со случайными числами:");
         for (int i = 0; i < myarray.length; i++) {
             Random random = new Random();
             int x = random.nextInt(21);
             myarray[i] = x - 10;
+            System.out.printf("%4d", myarray[i]);
         }
         int maxNegativeNum = myarray[0];
         for (int i = 0; i < myarray.length; i++) {
             if (myarray[i] < 0 && myarray[i] < maxNegativeNum) maxNegativeNum = myarray[i];
-            System.out.printf("%4d", myarray[i]);
         }
-        System.out.println("Максимальное отрицательное число в массиве: " + maxNegativeNum);
-
+        System.out.printf("%nМаксимальное отрицательное число в массиве: %s%n", maxNegativeNum);
+        int[] positivearray = new int[20];
         for (int i = 0; i < myarray.length; i++) {
-            if (myarray[i] < 0) myarray[i] = 0;
+            if (myarray[i] < 0) positivearray[i] = 0;
+            else positivearray[i] = myarray[i];
         }
-        int minPositiveNum = myarray[0];
-        for (int i = 0; i < myarray.length; i++) {
-            if (myarray[i] != 0) minPositiveNum = myarray[i];
-            System.out.printf("%4d", myarray[i]);
-            for (int j = 0; j < myarray.length; j++) {
-                if (myarray[j] > 0 && myarray[j] < minPositiveNum) minPositiveNum = myarray[j];
+        int minPositiveNum = positivearray[0];
+        for (int i = 0; i < positivearray.length; i++) {
+            if (positivearray[i] != 0) minPositiveNum = positivearray[i];
+            for (int j = 0; j < positivearray.length; j++) {
+                if (positivearray[j] > 0 && positivearray[j] < minPositiveNum) minPositiveNum = positivearray[j];
             }
         }
+        System.out.printf("Минимальное положительное число в массиве: %s%n", minPositiveNum);
+        System.out.println("Массив, где поменяли местами минимальный положительный элементс с максимально отрицательным:");
+        for (int i = 0; i < myarray.length; i++) {
+            if (myarray[i] == maxNegativeNum) myarray[i] = minPositiveNum;
+            else if (myarray[i] == minPositiveNum) myarray[i] = maxNegativeNum;
+            System.out.printf("%4d", myarray[i]);
+        }
 
-        System.out.println("Минимальное положительное число в массиве: " + minPositiveNum);
 
 
     }
