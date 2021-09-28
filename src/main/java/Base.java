@@ -14,9 +14,17 @@ public class Base {
             myarray[i] = x - 10;
             System.out.printf("%4d", myarray[i]);
         }
-        int maxNegativeNum = myarray[0];
+        int[] negativearray = new int[20];
         for (int i = 0; i < myarray.length; i++) {
-            if (myarray[i] < 0 && myarray[i] < maxNegativeNum) maxNegativeNum = myarray[i];
+            if (myarray[i] > 0) negativearray[i] = 0;
+            else negativearray[i] = myarray[i];
+        }
+        int maxNegativeNum = negativearray[0];
+        for (int i = 0; i < negativearray.length; i++) {
+            if (negativearray[i] != 0) maxNegativeNum = negativearray[i];
+            for (int j = 0; j < negativearray.length; j++) {
+                if (negativearray[j] < 0 && negativearray[j] > maxNegativeNum) maxNegativeNum = negativearray[j];
+            }
         }
         System.out.printf("%nМаксимальное отрицательное число в массиве: %s%n", maxNegativeNum);
         int[] positivearray = new int[20];
